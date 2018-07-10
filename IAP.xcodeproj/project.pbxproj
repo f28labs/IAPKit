@@ -140,6 +140,7 @@
 		7F852C851F51F88B008D8ADD /* Typealiases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F852C821F51F88B008D8ADD /* Typealiases.swift */; };
 		7FFCD9C81F65E92E00A03C58 /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FFCD9C71F65E92E00A03C58 /* Logging.swift */; };
 		7FFCD9CA1F65E92E00A03C58 /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FFCD9C71F65E92E00A03C58 /* Logging.swift */; };
+		BBBC2C4F20EBFE8100A0C3B8 /* AppStoreReceipt.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBC2C4E20EBFE8100A0C3B8 /* AppStoreReceipt.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -285,6 +286,7 @@
 		7F852C7E1F51F87A008D8ADD /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		7F852C821F51F88B008D8ADD /* Typealiases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typealiases.swift; sourceTree = "<group>"; };
 		7FFCD9C71F65E92E00A03C58 /* Logging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
+		BBBC2C4E20EBFE8100A0C3B8 /* AppStoreReceipt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStoreReceipt.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -533,6 +535,7 @@
 		7F5C9E7D1F51F42F002B41B4 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				BBBC2C4E20EBFE8100A0C3B8 /* AppStoreReceipt.swift */,
 				7F852C6F1F51F7A1008D8ADD /* Availability.swift */,
 				37DBC52B1F5EF6D600C4BE15 /* Certificates */,
 				75E0C2BA1F62DA7B002A9E2B /* Dates */,
@@ -864,6 +867,7 @@
 				79CE6789202CF14E0003C7CD /* UIFont.swift in Sources */,
 				75E0C2C41F62DAF0002A9E2B /* HTTPDateClient.swift in Sources */,
 				37924AA51F97FEB7005DB087 /* UserEvents.swift in Sources */,
+				BBBC2C4F20EBFE8100A0C3B8 /* AppStoreReceipt.swift in Sources */,
 				79CE6783202CD5A10003C7CD /* IAPDialogCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1019,7 +1023,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 432ZXYXDNY;
+				DEVELOPMENT_TEAM = KLE5KDJKF8;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -1102,7 +1106,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 432ZXYXDNY;
+				DEVELOPMENT_TEAM = KLE5KDJKF8;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";

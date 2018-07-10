@@ -36,18 +36,26 @@ import OpenSSL.sha
 class ReceiptValidator {
     
     static var hasReceipt: Bool {
-        guard let _ = Bundle.main.appStoreReceiptURL else {
+        guard let receiptURL = Bundle.main.appStoreReceiptURL else {
+            return false
+        }
+        
+        if (!FileManager.default.fileExists(atPath: receiptURL.path)) {
             return false
         }
         
         return true
     }
 
+    static var appStoreReceipt: AppStoreReceipt?  // f28
+    
     static var validatedProducts: [PurchasedProduct]? {
         
         var opaqueData: NSData?
         var bundleIdData: NSData?
         var hashData: NSData?
+        
+        self.appStoreReceipt = AppStoreReceipt()
         
         // The Apple Root Certificate is in the framework bundle
         let frameworkBundle = Bundle(for: ReceiptValidator.self)
@@ -58,11 +66,24 @@ class ReceiptValidator {
                 return nil
         }
         
-        guard let receiptURL = Bundle.main.appStoreReceiptURL,
-            let receiptData = NSData(contentsOf: receiptURL) else {
-                VerboseLog("Invalid receipt")
-                return nil
+        guard let receiptURL = Bundle.main.appStoreReceiptURL else {
+            VerboseLog("No ReceiptURL")
+            return nil
         }
+        
+        var receiptData: NSData!
+        do {
+            receiptData = try NSData(contentsOf: Bundle.main.appStoreReceiptURL!, options: NSData.ReadingOptions.alwaysMapped)
+        } catch {
+            print("ERROR: " + error.localizedDescription)
+            return nil
+        }
+    
+//            let receiptData = NSData(contentsOf: receiptURL, options: .alwaysMapped)
+//            let receiptData = NSData(contentsOf: receiptURL) else {
+//                VerboseLog("Invalid receipt")
+//                return nil
+//        }
         
         let bio = BIOWrapper(data: receiptData)
         let p7OrNil: UnsafeMutablePointer<PKCS7>? = d2i_PKCS7_bio(bio.bio, nil)
@@ -128,6 +149,11 @@ class ReceiptValidator {
                 case 2:
                     let strPtr = ptr
                     bundleIdData = NSData(bytes: strPtr, length: length)
+                    
+                    // F28 Addition
+                    var p = ptr
+                    let app_bundleIdentifier =  ASN1Helper.readString(pointer: &p, length: length) //f28
+                    self.appStoreReceipt?.bundleID = app_bundleIdentifier
                 case 4:
                     opaqueData = NSData(bytes: ptr!, length: length)
                 case 5:
@@ -136,6 +162,24 @@ class ReceiptValidator {
                     let p = ptr
                     let iapReceipt = PurchaseReceipt(with: p!, len: length)
                     iapReceipts.append(iapReceipt)
+                    
+                // App Receipt related F28
+                case 19:
+                    var p = ptr
+                    let app_originalAppVersion =  ASN1Helper.readString(pointer: &p, length: length)
+                    self.appStoreReceipt?.originalVersion = app_originalAppVersion
+                case 3:
+                    var p = ptr
+                    let app_currentAppVersion =  ASN1Helper.readString(pointer: &p, length: length)
+                    self.appStoreReceipt?.currentVersion = app_currentAppVersion
+                case 12:
+                    var p = ptr
+                    let app_receiptCreationDate = ASN1Helper.readDate(pointer: &p, length: length)
+                    self.appStoreReceipt?.creationDate = app_receiptCreationDate
+                case 0:
+                    var p = ptr
+                    let app_receiptType =  ASN1Helper.readString(pointer: &p, length: length)
+                    self.appStoreReceipt?.receiptType = app_receiptType
                 default:
                     break
                 }

@@ -26,6 +26,7 @@
 import Foundation
 import StoreKit
 
+
 /// A generic class which provides in-app-purchase utilities. Host applications
 /// provide a concrete type conforming to IAPPurchaseable so that IAPStore can
 /// conduct the full payment workflow, including presenting appropriate UI.
@@ -68,6 +69,21 @@ public class Store<Product: Purchaseable> {
         SKPaymentQueue.default().remove(paymentTransactionObserver)
         observers.forEach { NotificationCenter.default.removeObserver($0) }
     }
+    
+    // AppStoreReceipt, for the App Store App Item, NOT IAP items
+    public var appStoreReceipt: AppStoreReceipt? {
+        guard ReceiptValidator.hasReceipt else {
+            return nil
+        }
+        var products = ReceiptValidator.validatedProducts
+        if (products?.count)! > 0 {
+            products = nil
+        }
+        
+        return ReceiptValidator.appStoreReceipt
+    }
+    
+    
     
     
     /// A property to determine if the app bundle

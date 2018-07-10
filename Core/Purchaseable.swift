@@ -61,4 +61,5 @@ public protocol Purchaseable: Comparable {
     
     /// Required initializer.
     init?(productIdentifier: ProductIdentifier)
+    
 }

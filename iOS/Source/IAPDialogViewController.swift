@@ -37,6 +37,7 @@ class IAPDialogViewController: IAPViewController {
     @IBOutlet weak var footerBackground: UIVisualEffectView!
     @IBOutlet weak var headerBackground: UIVisualEffectView!
     @IBOutlet weak var restoreButton: UIButton!
+    @IBOutlet weak var titleLabel: UILabel! // F28 Labs added
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -204,6 +205,8 @@ private extension IAPDialogViewController {
             restoreButton.setTitleColor(darkerColor, for: .highlighted)
             restoreButton.setTitleColor(darkerColor, for: .selected)
         }
+        
+        titleLabel.text = "In-App Purchases"
     }
     
     func showActivityView() {

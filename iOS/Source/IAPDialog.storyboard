@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="SKd-H9-biH">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="SKd-H9-biH">
     <device id="ipad9_7" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -105,6 +105,12 @@
                                     <action selector="dismiss" destination="SKd-H9-biH" eventType="touchUpInside" id="6I2-ry-lnc"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="71E-Y7-j0J">
+                                <rect key="frame" x="246" y="30.5" width="48.5" height="23"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ekn-5g-HGj">
                                 <rect key="frame" x="503" y="16" width="21" height="22"/>
                                 <constraints>
@@ -120,6 +126,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="71E-Y7-j0J" firstAttribute="centerX" secondItem="Hot-Yo-1xM" secondAttribute="centerX" id="0OI-tS-AZF"/>
                             <constraint firstItem="ig6-LV-ayH" firstAttribute="bottom" secondItem="oV8-pk-g1b" secondAttribute="bottom" id="0Uv-sL-Kx1"/>
                             <constraint firstItem="0wu-zr-taA" firstAttribute="top" secondItem="iK0-Or-673" secondAttribute="bottom" constant="10" id="30d-9O-3Jq"/>
                             <constraint firstItem="oV8-pk-g1b" firstAttribute="leading" secondItem="ig6-LV-ayH" secondAttribute="leading" id="4JJ-aT-IOS"/>
@@ -144,6 +151,7 @@
                             <constraint firstItem="eJg-cT-XWa" firstAttribute="leading" secondItem="ig6-LV-ayH" secondAttribute="leading" constant="18" id="oEZ-JA-1R8"/>
                             <constraint firstItem="ig6-LV-ayH" firstAttribute="trailing" secondItem="Ekn-5g-HGj" secondAttribute="trailing" constant="16" id="qLz-rX-QD0"/>
                             <constraint firstItem="Wzu-z1-vOA" firstAttribute="top" secondItem="Hot-Yo-1xM" secondAttribute="top" id="qgn-9f-8Jm"/>
+                            <constraint firstItem="71E-Y7-j0J" firstAttribute="centerY" secondItem="eJg-cT-XWa" secondAttribute="centerY" id="xT9-hw-qIB"/>
                             <constraint firstItem="ig6-LV-ayH" firstAttribute="trailing" secondItem="0wu-zr-taA" secondAttribute="trailing" constant="18" id="yCg-JD-mc5"/>
                             <constraint firstItem="oV8-pk-g1b" firstAttribute="top" secondItem="Hot-Yo-1xM" secondAttribute="top" id="yP0-Ig-Vql"/>
                         </constraints>
@@ -176,6 +184,7 @@
                         <outlet property="restoreButtonCenterXConstraint" destination="a2i-k9-mrA" id="Im8-9F-VUH"/>
                         <outlet property="restoreButtonTopToViewConstraint" destination="NCb-BB-j2C" id="74q-XN-er1"/>
                         <outlet property="restoreButtonTrailingConstraint" destination="yCg-JD-mc5" id="Hdv-VD-bzR"/>
+                        <outlet property="titleLabel" destination="71E-Y7-j0J" id="Gd4-md-Rlv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w1x-t0-S0X" userLabel="First Responder" sceneMemberID="firstResponder"/>
