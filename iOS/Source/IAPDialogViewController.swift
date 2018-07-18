@@ -132,6 +132,10 @@ extension IAPDialogViewController {
         return .all
     }
     
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         
@@ -236,8 +240,19 @@ private extension IAPDialogViewController {
                 restoreButtonBottomToViewConstraint.isActive = false
                 restoreButtonTopToViewConstraint.isActive = true
                 restoreButtonTrailingConstraint.isActive = true
+
+                // Keep restore button at bottom
+//                buyNowButtonBottomToRestoreConstraint.isActive = true
+//                buyNowButtonBottomToViewConstraint.isActive = false
+//                restoreButtonCenterXConstraint.isActive = true
+//                restoreButtonBottomToViewConstraint.isActive = true
+//                restoreButtonTopToViewConstraint.isActive = false
+//                restoreButtonTrailingConstraint.isActive = false
+
+                restoreButton.setTitle("Restore", for: .normal)
                 
             } else {
+                restoreButton.setTitle("Restore Purchases", for: .normal)
                 headerBackground.isHidden = false
                 headerHeightConstraint.constant = headerBackgroundHeightCompact + view.safeAreaInsets.top
                 

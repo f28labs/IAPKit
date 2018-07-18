@@ -84,7 +84,7 @@ public class PaymentTransactionObserver: NSObject, SKPaymentTransactionObserver 
         // nothing to restore.
         guard queue.transactions.count > 0 else {
             // There were no transactions for this user
-            let localizedErrorMessage = NSLocalizedString("Sorry, no purchased products were found. If you have questions, please contact support@blackpixel.com.", tableName: nil, bundle: Bundle(for: PaymentTransactionObserver.self), value: "", comment: "no previous transactions were found on the users current iTunes account error message")
+            let localizedErrorMessage = NSLocalizedString("Sorry, no purchased products were found. If you have questions, please contact support@f28labs.com.", tableName: nil, bundle: Bundle(for: PaymentTransactionObserver.self), value: "", comment: "no previous transactions were found on the users current iTunes account error message")
             
             delegate?.transactionDidFail(localizedErrorMessage: localizedErrorMessage)
             
