@@ -36,14 +36,17 @@ import OpenSSL.sha
 class ReceiptValidator {
     
     static var hasReceipt: Bool {
+        print("ReceiptValidator - hasReceipt")
         guard let receiptURL = Bundle.main.appStoreReceiptURL else {
+            print("-->no ReceiptURL")
             return false
         }
         
         if (!FileManager.default.fileExists(atPath: receiptURL.path)) {
+            print("-->Receipt does not exist at URL:", receiptURL)
             return false
         }
-        
+        print("-->has Receipt = true")
         return true
     }
 

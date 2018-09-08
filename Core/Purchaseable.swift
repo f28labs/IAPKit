@@ -55,6 +55,9 @@ public protocol Purchaseable: Comparable {
     
     /// Returns a localized string suitable for displaying the product description in the Store's UI.
     var marketingMessage: String { get }
+  
+    /// Returns a localized ATTRIBUTED string suitable for displaying the product description in the Store's UI.
+    var attributedMarketingMessage: NSAttributedString? { get }
     
     /// Returns a localized string suitable for displaying in the Store's UI.
     var callToActionButtonText: String { get }

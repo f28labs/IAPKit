@@ -198,7 +198,7 @@ public class Store<Product: Purchaseable> {
                     guard let product = Product(productIdentifier: skProduct.productIdentifier) else { continue }
                     let storeProduct = StoreProduct(skProduct: skProduct,
                                                     marketingTitle: product.marketingTitle,
-                                                    marketingMessage: product.marketingMessage,
+                                                    marketingMessage: product.marketingMessage, attributedMarketingMessage: product.attributedMarketingMessage,
                                                     callToActionButtonText: product.callToActionButtonText)
                     storeProducts.append(storeProduct)
                 }
@@ -268,6 +268,7 @@ extension Store {
     }
 
     fileprivate func configureSecureDateProviderRefresh() {
+        print("&& configureSecureDateProviderRefresh")
         secureDateProviderRefreshIfNotPurchased()
 
         observers.append(NotificationCenter.when(.UIApplicationWillEnterForeground) { [weak self] _ in
@@ -275,10 +276,12 @@ extension Store {
         })
         
         observers.append(NotificationCenter.when(.SecureDateProviderOffsetRefreshed) { (_) in
+               print("&& configureSecureDateProviderRefresh-->.SecureDateProviderOffsetRefreshed")
             NotificationCenter.default.post(name: Notification.Name.IAPStoreDidRefresh, object: nil)
         })
         
         observers.append(NotificationCenter.when(.SecureDateProviderOffsetRefreshError) { (_) in
+            print("&& configureSecureDateProviderRefresh-->.SecureDateProviderOffsetRefreshError")
             NotificationCenter.default.post(name: Notification.Name.IAPStoreDidRefresh, object: nil)
         })
     }
@@ -309,6 +312,7 @@ extension Store: PaymentTransactionObserverDelegate {
                                                               productIdentifier: product.productIdentifier)
                 notificationUserInfo = [IAPNotificationUserInfoKeys.purchasedProduct.rawValue : revenueEventProduct]
             }
+            print("&&& didCompletePurchase")
             NotificationCenter.default.post(name: Notification.Name.IAPStoreDidRefresh, object: nil, userInfo: notificationUserInfo)
             
             let userInfo = [UserEvent.transaction.rawValue : UserEvent.TransactionType.purchase.rawValue,
@@ -365,6 +369,7 @@ struct StoreProduct {
     var skProduct: SKProduct
     var marketingTitle: String
     var marketingMessage: String
+    var attributedMarketingMessage: NSAttributedString?
     var callToActionButtonText: String
 }
 

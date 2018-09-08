@@ -130,7 +130,14 @@ extension IAPDialogCell {
         let title = NSAttributedString(string: product.skProduct.localizedTitle, attributes: [NSAttributedStringKey.font: UIFont.titleFont])
         let titleHeight = ceil(title.boundingRect(with: textSize, options: [.usesFontLeading, .usesLineFragmentOrigin], context: nil).height)
         
-        let description = NSAttributedString(string: product.marketingMessage, attributes: [NSAttributedStringKey.font: UIFont.descriptionFont])
+        // f28
+        var description = NSAttributedString(string: product.marketingMessage, attributes: [NSAttributedStringKey.font: UIFont.descriptionFont])
+        if let attribMessage = product.attributedMarketingMessage {
+            description = attribMessage
+        }
+        
+//        let description = NSAttributedString(string: product.marketingMessage, attributes: [NSAttributedStringKey.font: UIFont.descriptionFont])
+        
         let descriptionHeight = ceil(description.boundingRect(with: textSize, options: [.usesFontLeading, .usesLineFragmentOrigin], context: nil).height)
         
         guard isCompact else {
@@ -227,8 +234,16 @@ extension IAPDialogCell {
         self.selectedTitleColor = selectedTitleColor
 
         cellTitle.text = product.marketingTitle
-        cellDescription.text = product.marketingMessage
-
+        
+        if let attribMessage = product.attributedMarketingMessage {
+            cellDescription.attributedText = attribMessage
+        } else {
+            cellDescription.text = product.marketingMessage
+        }
+      
+      
+//        cellDescription.text = product.marketingMessage
+        
         // It's important that we let the StoreKit product dicate how
         // the currency should be displayed
         let formatter = NumberFormatter()
