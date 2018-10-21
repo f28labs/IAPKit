@@ -164,6 +164,9 @@ public class Store<Product: Purchaseable> {
                                                                 self.dismissAvailablePurchasesModal(wasCancelled: true)
         })
         
+        // Make presentation style .overFullScreen so we can work over other modals (with logging apple warning)
+        modalViewController.modalPresentationStyle = UIModalPresentationStyle.overFullScreen
+        
         presentingViewController.present(modalViewController, animated: true, completion: nil)
         self.modalViewController = modalViewController
         refreshProductsList()

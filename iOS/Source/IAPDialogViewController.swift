@@ -76,6 +76,12 @@ class IAPDialogViewController: IAPViewController {
             UIView.animate(withDuration: 0.2) {
                 self.activityView.alpha = 0.0
             }
+            
+            self.collectionView.selectItem(at: IndexPath(row: 0, section: 0), animated:true, scrollPosition: UICollectionViewScrollPosition.centeredVertically)
+            
+            self.collectionView(self.collectionView, didSelectItemAt: IndexPath(row: 0
+                , section: 0))
+
         }
     }
     
@@ -129,11 +135,17 @@ class IAPDialogViewController: IAPViewController {
 extension IAPDialogViewController {
     
     final override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return .all
+        return .portrait
+        // Limit to portrait f2.8 2018-10-21
+        // .all
     }
     
     override var prefersStatusBarHidden: Bool {
         return true
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+    
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
