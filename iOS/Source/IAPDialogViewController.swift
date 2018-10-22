@@ -61,7 +61,9 @@ class IAPDialogViewController: IAPViewController {
     private var accentColor: IAPColor?
     private var selectionColor: IAPColor?
     private var selectedIndex: IndexPath?
-    
+    // f2.8 2018-10-22 Add Property for preselectProductID.
+    private var preselectProductID: String?
+
     
     // MARK: Public Properties
     
@@ -77,10 +79,16 @@ class IAPDialogViewController: IAPViewController {
                 self.activityView.alpha = 0.0
             }
             
-            self.collectionView.selectItem(at: IndexPath(row: 0, section: 0), animated:true, scrollPosition: UICollectionViewScrollPosition.centeredVertically)
-            
-            self.collectionView(self.collectionView, didSelectItemAt: IndexPath(row: 0
-                , section: 0))
+            // f2.8 2018-10-22 If we have a preselectedProductID, find index of product to preselect it
+            if let prodID = self.preselectProductID {
+                if let row = products.firstIndex(where: { $0.skProduct.productIdentifier == prodID }) {
+                    
+                    self.collectionView.selectItem(at: IndexPath(row: row, section: 0), animated:true, scrollPosition: UICollectionViewScrollPosition.centeredVertically)
+                    
+                    self.collectionView(self.collectionView, didSelectItemAt: IndexPath(row: row
+                        , section: 0))
+                }
+            }
 
         }
     }
@@ -113,7 +121,15 @@ class IAPDialogViewController: IAPViewController {
         return controller
     }
     
-    
+    // f2.8 Alternate factory with preselectedProductID
+    static func make(accentColor: IAPColor, preselectProductID: String?, cancellationHandler: IAPCancellationHandler?) -> IAPDialogViewController {
+        
+        let dialog = self.make(accentColor: accentColor, cancellationHandler: cancellationHandler)
+        dialog.preselectProductID = preselectProductID
+        
+        return dialog
+    }
+        
     // MARK: Lifecycle
     
     override func viewDidLoad() {

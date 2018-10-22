@@ -43,6 +43,9 @@ public class Store<Product: Purchaseable> {
     /// The list of unpurchased products returned by a products request.
     private var availableProducts: [SKProduct] = []
     
+    /// placeholder for pre-selected product
+    private var preselectProductID: String?
+    
     /// The list of all purchased products.
     public var purchasedProducts: [PurchasedProduct]? {
         
@@ -172,6 +175,54 @@ public class Store<Product: Purchaseable> {
         refreshProductsList()
         
     }
+    
+    /// Walks the user through a purchase of one or more products, preselects an item
+    ///
+    /// - Parameters:
+    ///   - presentingViewController: ViewController to present the modal view above
+    ///   - completion: When StoreKit dismisses the modal view controller or the user dismisses the modal view controller by hitting the close button
+    public func presentAvailablePurchases(from presentingViewController: IAPViewController, preselectID: String?, completion: IAPCompletionHandler? = nil) {
+        
+//        print("****----> store.presentAvailablePurchases, preselectID:", preselectID)
+        
+        modalDismissalCompletion = completion
+        
+        var modalViewController: IAPDialogViewController
+        if let prodID = preselectID {
+//            modalViewController.preselectProductID = prodID
+            modalViewController = IAPDialogViewController.make(accentColor: Product.accentColorForStore, preselectProductID: prodID,
+                                                                   cancellationHandler: {
+                                                                    self.dismissAvailablePurchasesModal(wasCancelled: true)
+            })
+
+        } else {
+            modalViewController = IAPDialogViewController.make(accentColor:Product.accentColorForStore,
+                                                                   cancellationHandler: {
+                                                                    self.dismissAvailablePurchasesModal(wasCancelled: true)
+            })
+
+        }
+//        let modalViewController = IAPDialogViewController.make(accentColor: Product.accentColorForStore,
+//                                                               cancellationHandler: {
+//                                                                self.dismissAvailablePurchasesModal(wasCancelled: true)
+//        })
+
+        
+        // Make presentation style .overFullScreen so we can work over other modals (with logging apple warning)
+        modalViewController.modalPresentationStyle = UIModalPresentationStyle.overFullScreen
+//        if let prodID = preselectID {
+//            modalViewController.preselectProductID = prodID
+//        }
+        
+        
+        presentingViewController.present(modalViewController, animated: true, completion: nil)
+        self.modalViewController = modalViewController
+        
+        
+        refreshProductsList()
+        
+    }
+    
     
     
     private func refreshProductsList() {
